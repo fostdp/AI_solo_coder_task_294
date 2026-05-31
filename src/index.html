@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>酶促反应动力学模拟</title>
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🧬 酶促反应动力学模拟实验</h1>
+        
+        <div class="main-content">
+            <div class="panel">
+                <div class="panel-title">📈 反应速率曲线</div>
+                <div class="plot-selector">
+                    <button class="active" data-plot="michaelis">Michaelis-Menten</button>
+                    <button data-plot="lineweaver">Lineweaver-Burk</button>
+                    <button data-plot="hanes">Hanes-Woolf</button>
+                    <button data-plot="eadie">Eadie-Hofstee</button>
+                </div>
+                <canvas id="rateCanvas"></canvas>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-title">⏱️ 底物消耗与产物积累</div>
+                <canvas id="timeCanvas"></canvas>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="panel">
+                <div class="panel-title">🎛️ 实验参数控制</div>
+                <div class="controls">
+                    <div class="formula">
+                        V = V<sub>max</sub> · [S] / (K<sub>m</sub> + [S])
+                    </div>
+                    
+                    <div class="control-group">
+                        <div class="control-label">
+                            <span>底物浓度 [S] (mM)</span>
+                            <span class="control-value" id="sValue">50</span>
+                        </div>
+                        <input type="range" id="sConcentration" min="1" max="200" value="50">
+                    </div>
+                    
+                    <div class="control-group">
+                        <div class="control-label">
+                            <span>酶浓度 [E] (μM)</span>
+                            <span class="control-value" id="eValue">10</span>
+                        </div>
+                        <input type="range" id="eConcentration" min="1" max="50" value="10">
+                    </div>
+                    
+                    <div class="control-group">
+                        <div class="control-label">
+                            <span>米氏常数 K<sub>m</sub> (mM)</span>
+                            <span class="control-value" id="kmValue">25</span>
+                        </div>
+                        <input type="range" id="km" min="5" max="100" value="25">
+                    </div>
+                    
+                    <div class="control-group">
+                        <div class="control-label">
+                            <span>催化常数 k<sub>cat</sub> (s<sup>-1</sup>)</span>
+                            <span class="control-value" id="kcatValue">100</span>
+                        </div>
+                        <input type="range" id="kcat" min="10" max="500" value="100">
+                    </div>
+                    
+                    <div class="buttons">
+                        <button class="btn-primary" id="startBtn">▶️ 开始反应</button>
+                        <button class="btn-warning" id="pauseBtn">⏸️ 暂停</button>
+                        <button class="btn-warning" id="resetBtn">🔄 重置</button>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn-success" id="saveBtn">💾 保存实验</button>
+                        <button class="btn-success" id="screenshotBtn">📸 截图保存</button>
+                    </div>
+                </div>
+                <div class="status" id="status"></div>
+            </div>
+            
+            <div class="panel">
+                <div class="panel-title">📊 实时数据</div>
+                <div class="info-panel">
+                    <div class="info-item">
+                        <div class="label">最大反应速率 V<sub>max</sub></div>
+                        <div class="value" id="vmax">0</div>
+                        <div style="font-size: 12px; color: #aaa;">mM/s</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">当前反应速率 V</div>
+                        <div class="value" id="currentV">0</div>
+                        <div style="font-size: 12px; color: #aaa;">mM/s</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">剩余底物</div>
+                        <div class="value" id="remainingS">0</div>
+                        <div style="font-size: 12px; color: #aaa;">mM</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="label">生成产物</div>
+                        <div class="value" id="productP">0</div>
+                        <div style="font-size: 12px; color: #aaa;">mM</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <div class="panel-title">🎨 反应动画</div>
+                    <canvas id="animationCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+</body>
+</html>

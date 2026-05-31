@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-05-13T01:39:30.421Z",
+  "duration": 0.06,
+  "totalTests": 23,
+  "passed": 23,
+  "failed": 0,
+  "passRate": "100.0",
+  "testResults": [
+    {
+      "name": "米氏方程数值验证",
+      "passed": 6,
+      "failed": 0
+    },
+    {
+      "name": "参数边界值溢出测试",
+      "passed": 12,
+      "failed": 0
+    },
+    {
+      "name": "后端API测试",
+      "passed": 5,
+      "failed": 0
+    }
+  ]
+}
